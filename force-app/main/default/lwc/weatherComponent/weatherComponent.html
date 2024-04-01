@@ -1,0 +1,9 @@
+<template>
+    <template lwc:if={weatherData}>
+        <div class="weather">
+            <div>Temperature: {weatherData.main.temp}°C</div>
+            <div>Description: {weatherDescription}</div>
+            <img src={weatherIconUrl} alt="Weather Icon"/>
+        </div>
+    </template>
+</template>
