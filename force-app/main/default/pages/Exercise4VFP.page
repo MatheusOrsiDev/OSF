@@ -1,0 +1,42 @@
+<apex:page standardController="Account" extensions="AccountControllerExtension">
+
+    <apex:form>
+        <apex:pageBlock title="Account Primary Contact">
+            <apex:pageBlockSection columns="1">
+                <apex:inputField value="{!Account.Name}" />
+                <apex:inputField value="{!Account.AccountNumber}" />
+                <apex:inputField value="{!Account.Type}" />
+                <apex:inputField value="{!Account.Active__c}" />
+                <apex:inputField value="{!Account.Phone}" />
+                <apex:inputField value="{!Account.Fax}" />
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons>
+                <apex:commandButton action="{!save}" value="Save"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+
+        <apex:pageBlock title="Search Related Contacts">
+            <apex:pageBlockSection>
+                <apex:inputText value="{!searchKeyword}" />
+                <apex:commandButton value="Search" action="{!search}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        <apex:pageBlock title="Contacts" rendered="{!contacts != null}">
+            <apex:pageBlockTable value="{!contacts}" var="contact">
+                <apex:column value="{!contact.Name}" headerValue="Name"/>
+                <apex:column value="{!contact.Title}" headerValue="Email"/>
+                <apex:column value="{!contact.Phone}" headerValue="Phone"/>
+                <apex:column value="{!contact.Is_Primary_Contact__c}" headerValue="Is Primary Contact"/>
+                <apex:column headerValue="Primary Contact">
+                    <apex:outputPanel rendered="{!NOT(contact.Is_Primary_Contact__c)}">
+                        <apex:commandLink action="{!handlePrimaryContactChange}" value="Set as Primary" id="theCommandLink">
+                            <apex:param name="selectedContactId" value="{!contact.Id}" assignTo="{!contactId}"/>
+                        </apex:commandLink>
+                    </apex:outputPanel>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
