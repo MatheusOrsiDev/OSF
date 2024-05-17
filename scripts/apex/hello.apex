@@ -1,10 +1,14 @@
-String dailySchedule = '0 0 10 * * ?';
-System.schedule('Daily Job', dailySchedule, new PrimaryContactEmailBatchSchedule());
+Datetime startTime = Datetime.now();
+////////////////////////////////////
 
+List<Account> accounts = [SELECT Id, Name FROM Account];
+List<Account> accounts = [SELECT Id, Name FROM Account];
+List<Account> accounts = [SELECT Id, Name FROM Account];
+List<Account> accounts = [SELECT Id, Name FROM Account];
+List<Account> accounts = [SELECT Id, Name FROM Account];
+List<Account> accounts = [SELECT Id, Name FROM Account];
 
-String weeklySchedule = '0 0 13 ? * FRI';
-System.schedule('Weekly Job', weeklySchedule, new PrimaryContactEmailBatchSchedule());
+////////////////////////////////////
+Datetime endTime = Datetime.now();
+System.debug('Total time: ' + (endTime.getTime() - startTime.getTime()));
 
-
-String monthlySchedule = '0 0 18 ? * 6L';
-System.schedule('Monthly Job', monthlySchedule, new PrimaryContactEmailBatchSchedule());
