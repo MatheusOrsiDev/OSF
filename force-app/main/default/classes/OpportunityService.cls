@@ -49,4 +49,43 @@ public class OpportunityService {
               
       	}
     }
+
+    public static void createTaskWhenOpportunityIsInFirstStage(List<Opportunity> opportunities){
+
+        List<Opportunity> opportuntiesThatAreProspecting = new List<Opportunity>();
+
+        for(Opportunity opps : opportunities){
+
+            if(opps.StageName == 'Prospecting'){
+
+                opportuntiesThatAreProspecting.add(opps);
+
+            }
+
+        }
+
+        if(!opportuntiesThatAreProspecting.isEmpty()){
+
+            List<Task> tasksToBeInserted = new List<Task>();
+            Date oneWeekFromToday = Date.today().addDays(7);
+
+            for(Opportunity opps : opportuntiesThatAreProspecting){
+
+                Task newTask = new Task(
+                    Subject = 'Call',
+                    Priority = 'Normal',
+                    Status = 'In Progress',
+                    OwnerId = opps.OwnerId,
+                    WhatId = opps.Id,
+                    ActivityDate = oneWeekFromToday
+                    
+                );
+
+                tasksToBeInserted.add(newTask);
+
+            }
+            insert tasksToBeInserted;
+        }
+
+    }
 }
